@@ -6,7 +6,7 @@ import static org.lwjgl.nanovg.NanoVG.*;
 import java.util.Map;
 import org.joml.Vector2fc;
 import org.joml.Vector4f;
-import org.liquidengine.legui.image.Image;
+import org.liquidengine.legui.core.image.Image;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.ImageRenderer;
 import org.lwjgl.nanovg.NVGPaint;

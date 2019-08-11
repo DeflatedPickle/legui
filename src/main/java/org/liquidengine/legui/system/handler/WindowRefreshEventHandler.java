@@ -1,11 +1,11 @@
 package org.liquidengine.legui.system.handler;
 
 import java.util.List;
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Frame;
-import org.liquidengine.legui.component.Layer;
-import org.liquidengine.legui.event.WindowRefreshEvent;
-import org.liquidengine.legui.listener.processor.EventProcessor;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.component.Frame;
+import org.liquidengine.legui.core.component.Layer;
+import org.liquidengine.legui.core.event.WindowRefreshEvent;
+import org.liquidengine.legui.core.listener.processor.EventProcessor;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemWindowRefreshEvent;
 
@@ -16,7 +16,7 @@ public class WindowRefreshEventHandler extends AbstractSystemEventHandler<System
 
     @Override
     protected boolean handle(SystemWindowRefreshEvent event, Layer layer, Context context, Frame frame) {
-        pushEvent(layer.getContainer(), context, frame);
+        pushEvent(layer, context, frame);
         return false;
     }
 

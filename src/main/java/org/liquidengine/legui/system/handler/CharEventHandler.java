@@ -1,9 +1,9 @@
 package org.liquidengine.legui.system.handler;
 
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Frame;
-import org.liquidengine.legui.event.CharEvent;
-import org.liquidengine.legui.listener.processor.EventProcessor;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.component.Frame;
+import org.liquidengine.legui.core.event.CharEvent;
+import org.liquidengine.legui.core.listener.processor.EventProcessor;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemCharEvent;
 

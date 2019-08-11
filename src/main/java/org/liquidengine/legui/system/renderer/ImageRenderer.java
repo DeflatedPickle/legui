@@ -3,7 +3,7 @@ package org.liquidengine.legui.system.renderer;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.joml.Vector2fc;
-import org.liquidengine.legui.image.Image;
+import org.liquidengine.legui.core.image.Image;
 import org.liquidengine.legui.system.context.Context;
 
 /**

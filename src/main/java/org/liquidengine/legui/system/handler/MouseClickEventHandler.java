@@ -1,23 +1,23 @@
 package org.liquidengine.legui.system.handler;
 
-import static org.liquidengine.legui.event.MouseClickEvent.MouseClickAction.CLICK;
-import static org.liquidengine.legui.event.MouseClickEvent.MouseClickAction.PRESS;
-import static org.liquidengine.legui.event.MouseClickEvent.MouseClickAction.RELEASE;
+import static org.liquidengine.legui.core.event.MouseClickEvent.MouseClickAction.CLICK;
+import static org.liquidengine.legui.core.event.MouseClickEvent.MouseClickAction.PRESS;
+import static org.liquidengine.legui.core.event.MouseClickEvent.MouseClickAction.RELEASE;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.joml.Vector2f;
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Frame;
-import org.liquidengine.legui.component.Layer;
-import org.liquidengine.legui.component.Widget;
-import org.liquidengine.legui.event.FocusEvent;
-import org.liquidengine.legui.event.MouseClickEvent;
-import org.liquidengine.legui.input.Mouse;
-import org.liquidengine.legui.listener.processor.EventProcessor;
-import org.liquidengine.legui.style.Style.DisplayType;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.component.Frame;
+import org.liquidengine.legui.core.component.Layer;
+import org.liquidengine.legui.core.component.Widget;
+import org.liquidengine.legui.core.event.FocusEvent;
+import org.liquidengine.legui.core.event.MouseClickEvent;
+import org.liquidengine.legui.core.input.Mouse;
+import org.liquidengine.legui.core.listener.processor.EventProcessor;
+import org.liquidengine.legui.core.style.Style.DisplayType;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemMouseClickEvent;
 import org.lwjgl.glfw.GLFW;
@@ -41,7 +41,7 @@ public class MouseClickEventHandler implements SystemEventHandler<SystemMouseCli
         Component target     = null;
         for (Layer layer : layers) {
             if (layer.isEventReceivable()) {
-                if (!layer.getContainer().isVisible() || !layer.getContainer().isEnabled()) {
+                if (!layer.isVisible() || !layer.isEnabled()) {
                     continue;
                 }
                 target = SehUtil.getTargetComponent(layer, cursorPos);
@@ -100,7 +100,7 @@ public class MouseClickEventHandler implements SystemEventHandler<SystemMouseCli
     private void removeFocus(Component targetComponent, Frame frame, Context context) {
         List<Layer> allLayers = frame.getAllLayers();
         for (Layer layer : allLayers) {
-            List<Component> childComponents = layer.getContainer().getChildComponents();
+            List<Component> childComponents = layer.getChildComponents();
             for (Component child : childComponents) {
                 removeFocus(targetComponent, child, context, frame);
             }

@@ -2,12 +2,12 @@ package org.liquidengine.legui.system.renderer.nvg.icon;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.icon.CharIcon;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.icon.CharIcon;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.nvg.NvgIconRenderer;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgText;
-import org.liquidengine.legui.util.TextUtil;
+import org.liquidengine.legui.core.util.TextUtil;
 
 /**
  * Created by ShchAlexander on 13.03.2017.

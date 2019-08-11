@@ -2,7 +2,7 @@ package org.liquidengine.legui.system.handler.processor;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import org.liquidengine.legui.component.Frame;
+import org.liquidengine.legui.core.component.Frame;
 import org.liquidengine.legui.system.context.CallbackKeeper;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemCharEvent;

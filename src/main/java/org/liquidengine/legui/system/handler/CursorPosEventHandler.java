@@ -4,14 +4,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.joml.Vector2f;
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Frame;
-import org.liquidengine.legui.component.Layer;
-import org.liquidengine.legui.event.CursorEnterEvent;
-import org.liquidengine.legui.event.Event;
-import org.liquidengine.legui.event.MouseDragEvent;
-import org.liquidengine.legui.input.Mouse;
-import org.liquidengine.legui.listener.processor.EventProcessor;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.component.Frame;
+import org.liquidengine.legui.core.component.Layer;
+import org.liquidengine.legui.core.event.CursorEnterEvent;
+import org.liquidengine.legui.core.event.Event;
+import org.liquidengine.legui.core.event.MouseDragEvent;
+import org.liquidengine.legui.core.input.Mouse;
+import org.liquidengine.legui.core.listener.processor.EventProcessor;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemCursorPosEvent;
 
@@ -36,7 +36,7 @@ public class CursorPosEventHandler extends AbstractSystemEventHandler<SystemCurs
         Collections.reverse(allLayers);
         Component targetComponent = null;
         for (Layer layer : allLayers) {
-            if (!layer.isEventReceivable() || !layer.getContainer().isVisible() || !layer.getContainer().isEnabled()) {
+            if (!layer.isEventReceivable() || !layer.isVisible() || !layer.isEnabled()) {
                 continue;
             }
             targetComponent = SehUtil.getTargetComponent(layer, cursorPosition);
@@ -73,7 +73,7 @@ public class CursorPosEventHandler extends AbstractSystemEventHandler<SystemCurs
      */
     @Override
     protected boolean handle(SystemCursorPosEvent event, Layer layer, Context context, Frame frame) {
-        List<Component> childComponents = layer.getContainer().getChildComponents();
+        List<Component> childComponents = layer.getChildComponents();
         for (Component child : childComponents) {
             handle(child, context, frame);
         }

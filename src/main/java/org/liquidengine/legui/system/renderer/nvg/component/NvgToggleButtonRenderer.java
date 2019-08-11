@@ -8,9 +8,9 @@ import static org.lwjgl.nanovg.NanoVG.nvgIntersectScissor;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.liquidengine.legui.component.ToggleButton;
-import org.liquidengine.legui.icon.Icon;
-import org.liquidengine.legui.style.Style;
+import org.liquidengine.legui.core.component.ToggleButton;
+import org.liquidengine.legui.core.icon.Icon;
+import org.liquidengine.legui.core.style.Style;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgRenderUtils;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgShapes;

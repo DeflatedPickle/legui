@@ -1,13 +1,13 @@
 package org.liquidengine.legui.demo.layout;
 
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Frame;
-import org.liquidengine.legui.component.Panel;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.component.Frame;
+import org.liquidengine.legui.core.component.Panel;
 import org.liquidengine.legui.demo.Demo;
-import org.liquidengine.legui.style.Style.DisplayType;
-import org.liquidengine.legui.style.Style.PositionType;
-import org.liquidengine.legui.style.color.ColorConstants;
-import org.liquidengine.legui.style.flex.FlexStyle.FlexDirection;
+import org.liquidengine.legui.core.style.Style.DisplayType;
+import org.liquidengine.legui.core.style.Style.PositionType;
+import org.liquidengine.legui.core.style.color.ColorConstants;
+import org.liquidengine.legui.core.style.flex.FlexStyle.FlexDirection;
 
 /**
  * @author Aliaksandr_Shcherbin.

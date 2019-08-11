@@ -2,8 +2,8 @@ package org.liquidengine.legui.system.renderer.nvg.component;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.liquidengine.legui.component.Slider;
-import org.liquidengine.legui.component.optional.Orientation;
+import org.liquidengine.legui.core.component.Slider;
+import org.liquidengine.legui.core.component.optional.Orientation;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgColorUtil;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgShapes;

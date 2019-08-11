@@ -2,10 +2,10 @@ package org.liquidengine.legui.system.renderer.nvg.component;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.liquidengine.legui.component.Tooltip;
-import org.liquidengine.legui.component.optional.TextState;
-import org.liquidengine.legui.component.optional.align.HorizontalAlign;
-import org.liquidengine.legui.component.optional.align.VerticalAlign;
+import org.liquidengine.legui.core.component.Tooltip;
+import org.liquidengine.legui.core.component.optional.TextState;
+import org.liquidengine.legui.core.component.optional.align.HorizontalAlign;
+import org.liquidengine.legui.core.component.optional.align.VerticalAlign;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgColorUtil;
 import org.lwjgl.nanovg.NVGColor;
@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.liquidengine.legui.style.util.StyleUtilities.getPadding;
+import static org.liquidengine.legui.core.style.util.StyleUtilities.getPadding;
 import static org.liquidengine.legui.system.renderer.nvg.util.NvgRenderUtils.*;
 import static org.lwjgl.nanovg.NanoVG.*;
 import static org.lwjgl.system.MemoryUtil.*;

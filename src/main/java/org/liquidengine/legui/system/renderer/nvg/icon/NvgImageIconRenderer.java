@@ -6,8 +6,8 @@ import static org.liquidengine.legui.system.renderer.nvg.util.NvgRenderUtils.get
 import java.util.HashMap;
 
 import org.joml.Vector2f;
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.icon.ImageIcon;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.icon.ImageIcon;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.ImageRenderer;
 import org.liquidengine.legui.system.renderer.nvg.NvgIconRenderer;

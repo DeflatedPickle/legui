@@ -5,7 +5,7 @@ import static org.liquidengine.legui.system.renderer.nvg.util.NvgRenderUtils.res
 import static org.lwjgl.nanovg.NanoVG.nvgIntersectScissor;
 
 import org.joml.Vector2f;
-import org.liquidengine.legui.component.Button;
+import org.liquidengine.legui.core.component.Button;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgText;
 

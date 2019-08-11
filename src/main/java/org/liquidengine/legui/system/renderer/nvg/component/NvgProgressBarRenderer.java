@@ -5,7 +5,7 @@ import static org.lwjgl.nanovg.NanoVG.nvgSave;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.liquidengine.legui.component.ProgressBar;
+import org.liquidengine.legui.core.component.ProgressBar;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgShapes;
 

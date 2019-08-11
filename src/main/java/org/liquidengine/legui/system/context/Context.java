@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
-import org.liquidengine.legui.component.Component;
+import org.liquidengine.legui.core.component.Component;
 
 /**
  * Created by ShchAlexander on 1/25/2017.

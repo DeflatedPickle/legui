@@ -2,12 +2,12 @@ package org.liquidengine.legui.system.renderer.nvg.util;
 
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.optional.align.HorizontalAlign;
-import org.liquidengine.legui.component.optional.align.VerticalAlign;
-import org.liquidengine.legui.style.Style;
-import org.liquidengine.legui.style.shadow.Shadow;
-import org.liquidengine.legui.style.util.StyleUtilities;
+import org.liquidengine.legui.core.component.Component;
+import org.liquidengine.legui.core.component.optional.align.HorizontalAlign;
+import org.liquidengine.legui.core.component.optional.align.VerticalAlign;
+import org.liquidengine.legui.core.style.Style;
+import org.liquidengine.legui.core.style.shadow.Shadow;
+import org.liquidengine.legui.core.style.util.StyleUtilities;
 import org.lwjgl.nanovg.NVGColor;
 import org.lwjgl.nanovg.NVGPaint;
 
