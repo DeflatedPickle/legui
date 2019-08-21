@@ -127,7 +127,6 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_Z;
  */
 public final class Keyboard {
 
-
     public enum Key {
         KEY_UNKNOWN(GLFW_KEY_UNKNOWN),
         KEY_SPACE(GLFW_KEY_SPACE),

@@ -10,9 +10,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joml.Vector2f;
 
 /**
- * Default structure which should be associated with OpenGL window. Contains two default layers: <ul> <li>Component layer - holds components and always on
- * bottom of all layers.</li> <li>Tooltip layer - holds tooltips and always on top of all layers.</li> </ul> <span style="color:red;">NOTE: layers processed in
- * reverse order - from top to bottom.</span>
+ * Default structure which should be associated with OpenGL window. Contains two default layers:
+ * <ul>
+ *      <li>Component layer - holds components and always on bottom of all layers.</li>
+ *      <li>Tooltip layer - holds tooltips and always on top of all layers.</li>
+ * </ul>
+ * <span style="color:red;">NOTE: layers processed in reverse order - from the last one to the first one.</span>
  */
 public class Frame {
 
@@ -70,7 +73,8 @@ public class Frame {
     }
 
     /**
-     * Used to set layer containers size. NOTE: All Layers will be resized to specified size!
+     * Used to set layer containers size.
+     * NOTE: All Layers will be resized to specified size!
      *
      * @param size frame size.
      */
@@ -79,7 +83,8 @@ public class Frame {
     }
 
     /**
-     * Used to set layer containers size. NOTE: All Layers will be resized to specified size!
+     * Used to set layer containers size.
+     * NOTE: All Layers will be resized to specified size!
      *
      * @param width width.
      * @param height height.
@@ -91,7 +96,8 @@ public class Frame {
     }
 
     /**
-     * Used to add layer to frame. <span style="color:red;">NOTE: layers processed in reverse order - from top to bottom.</span>
+     * Used to add layer to frame.
+     * <span style="color:red;">NOTE: layers processed in reverse order - from the last one to the first one.</span>
      *
      * @param layer layer to add.
      */
@@ -147,7 +153,7 @@ public class Frame {
     }
 
     /**
-     * Used to retrieve default component layer. <span style="color:red;">NOTE: layers processed in reverse order - from top to bottom.</span>
+     * Used to retrieve default component layer.
      *
      * @return default component layer.
      */
@@ -156,9 +162,9 @@ public class Frame {
     }
 
     /**
-     * Used to retrieve default component layer. <span style="color:red;">NOTE: layers processed in reverse order - from top to bottom.</span>
+     * Used to set default component layer.
      *
-     * @return default component layer.
+     * @param layer new component layer.
      */
     public void setComponentLayer(Layer layer) {
         this.componentLayer.setFrame(null);
@@ -167,7 +173,7 @@ public class Frame {
     }
 
     /**
-     * Used to retrieve default tooltip layer. <span style="color:red;">NOTE: layers processed in reverse order - from top to bottom.</span>
+     * Used to retrieve default tooltip layer.
      *
      * @return default tooltip layer.
      */
@@ -176,7 +182,20 @@ public class Frame {
     }
 
     /**
-     * Used to retrieve layers added by developer. <span style="color:red;">NOTE: layers processed in reverse order - from top to bottom.</span>
+     * Used to set default tooltip layer.
+     *
+     * @param layer new tooltip layer.
+     */
+    public void setTooltipLayer(Layer layer) {
+        this.tooltipLayer.setFrame(null);
+        this.tooltipLayer = layer;
+        changeFrame(this.tooltipLayer);
+    }
+
+
+    /**
+     * Used to retrieve layers added by user.
+     * <span style="color:red;">NOTE: layers processed in reverse order - from the last one to the first one.</span>
      *
      * @return layers added by developer.
      */
@@ -185,9 +204,15 @@ public class Frame {
     }
 
     /**
-     * Used to retrieve all layers where <ul> <li><b>List[0]</b> - default component layer.</li> <li><b>List[1]-List[length-2]</b> - layers added by
-     * developer.</li> <li><b>List[length-1]</b> - default tooltip layer.</li> </ul> <p> <span style="color:red;">NOTE: layers processed in reverse order - from
-     * top to bottom.</span>
+     * Used to retrieve all layers where
+     * <ul>
+     *     <li><b>List[0]</b> - default component layer.</li>
+     *     <li><b>List[1]-List[length-2]</b> - layers added by user.</li>
+     *     <li><b>List[length-1]</b> - default tooltip layer.</li>
+     * </ul>
+     * <p>
+     *     <span style="color:red;">NOTE: layers processed in reverse order - from the last one to the first one.</span>
+     * </p>
      *
      * @return all layers.
      */

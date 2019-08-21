@@ -102,6 +102,9 @@ public final class StyleUtilities {
      * NOTE. IF radius specified in percents - radius will be calculated using only width of component - will be represented with segment of circle (not ellipse).
      * </p>
      *
+     * @param component component to use for retrieving border radius.
+     * @param style style to use for retrieving border radius.
+     *
      * @return vector of four border radius.
      */
     public static Vector4f getBorderRadius(Component component, Style style) {

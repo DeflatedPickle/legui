@@ -93,6 +93,7 @@ public class NvgRenderer extends AbstractRenderer {
      * @param image image to render.
      * @param position image position.
      * @param size image size.
+     * @param properties additional rendering properties.
      * @param context context.
      */
     public static void renderImage(Image image, Vector2fc position, Vector2fc size, Map<String, Object> properties, Context context) {
