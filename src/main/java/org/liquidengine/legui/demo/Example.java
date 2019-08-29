@@ -1,5 +1,6 @@
 package org.liquidengine.legui.demo;
 
+import static org.liquidengine.legui.core.style.color.ColorUtil.fromInt;
 import static org.lwjgl.glfw.GLFW.GLFW_DONT_CARE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
@@ -31,9 +32,12 @@ import org.liquidengine.legui.core.component.Component;
 import org.liquidengine.legui.core.component.Frame;
 import org.liquidengine.legui.core.event.WindowSizeEvent;
 import org.liquidengine.legui.core.listener.WindowSizeEventListener;
+import org.liquidengine.legui.core.style.color.ColorConstants;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.core.layout.LayoutManager;
 import org.liquidengine.legui.system.renderer.Renderer;
+import org.liquidengine.legui.core.theme.Themes;
+import org.liquidengine.legui.core.theme.colored.FlatColoredTheme;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -75,6 +79,16 @@ public class Example {
         for (int i = 0; i < remaining; i++) {
             monitors[i] = pointerBuffer.get(i);
         }
+
+        Themes.setDefaultTheme(new FlatColoredTheme(
+            fromInt(245, 245, 245, 1), // backgroundColor
+            fromInt(176, 190, 197, 1), // borderColor
+            fromInt(176, 190, 197, 1), // sliderColor
+            fromInt(100, 181, 246, 1), // strokeColor
+            fromInt(165, 214, 167, 1), // allowColor
+            fromInt(239, 154, 154, 1), // denyColor
+            ColorConstants.transparent() // shadowColor
+        ));
 
         // Firstly we need to create frame component for window.
         Frame frame = new Frame(WIDTH, HEIGHT);// new Frame(WIDTH, HEIGHT);
@@ -174,8 +188,12 @@ public class Example {
                 toggleFullscreen = false;
             }
 
-            // When everything done we need to relayout components.
-            LayoutManager.getInstance().layout(frame);
+            if(gui.getGenerateEventsByLayoutManager().isChecked()) {
+                // When everything done we need to relayout components.
+                LayoutManager.getInstance().layout(frame, context);
+            } else {
+                LayoutManager.getInstance().layout(frame);
+            }
 
             update();
             updCntr++;

@@ -11,11 +11,14 @@ import org.liquidengine.legui.core.theme.colored.FlatColoredTheme.FlatColoredThe
  */
 public class FlatScrollBarTheme<T extends ScrollBar> extends FlatComponentTheme<T> {
 
-    private FlatColoredThemeSettings settings;
+    /**
+     * Default constructor. Settings should be specified before using this theme.
+     */
+    public FlatScrollBarTheme() {
+    }
 
     public FlatScrollBarTheme(FlatColoredThemeSettings settings) {
         super(settings);
-        this.settings = settings;
     }
 
     /**
@@ -27,7 +30,7 @@ public class FlatScrollBarTheme<T extends ScrollBar> extends FlatComponentTheme<
     public void apply(T component) {
         super.apply(component);
         component.getStyle().setShadow(null);
-        component.getStyle().getBackground().setColor(settings.borderColor());
+        component.getStyle().getBackground().setColor(settings.sliderColor());
         component.setArrowColor(ColorUtil.oppositeBlackOrWhite(settings.borderColor()));
         component.setScrollColor(settings.backgroundColor());
         component.setArrowsEnabled(false);

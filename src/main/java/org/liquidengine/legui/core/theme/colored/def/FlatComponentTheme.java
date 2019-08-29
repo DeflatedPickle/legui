@@ -7,6 +7,8 @@ import org.liquidengine.legui.core.theme.AbstractTheme;
 import org.liquidengine.legui.core.theme.Themes;
 import org.liquidengine.legui.core.theme.colored.FlatColoredTheme.FlatColoredThemeSettings;
 
+import org.liquidengine.legui.core.style.border.SimpleLineBorder;
+
 import java.util.List;
 
 /**
@@ -16,9 +18,23 @@ import java.util.List;
  */
 public class FlatComponentTheme<T extends Component> extends AbstractTheme<T> {
 
-    private final FlatColoredThemeSettings settings;
+    protected FlatColoredThemeSettings settings;
+
+    /**
+     * Default constructor. Settings should be specified before using this theme.
+     */
+    public FlatComponentTheme() {
+    }
 
     public FlatComponentTheme(FlatColoredThemeSettings settings) {
+        this.settings = settings;
+    }
+
+    public FlatColoredThemeSettings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(FlatColoredThemeSettings settings) {
         this.settings = settings;
     }
 
@@ -30,12 +46,16 @@ public class FlatComponentTheme<T extends Component> extends AbstractTheme<T> {
     @Override
     public void apply(T component) {
         super.apply(component);
-        component.getStyle().setBorder(null);
+        if(settings.borderColor().z==0) {
+            component.getStyle().setBorder(null);
+        } else {
+            component.getStyle().setBorder(new SimpleLineBorder(settings.borderColor(), 1));
+        }
         component.getStyle().setBorderRadius(2f);
         component.getStyle().getBackground().setColor(settings.backgroundColor());
         component.getStyle().setFocusedStrokeColor(settings.strokeColor());
 
-        if (settings.shadowColor()== null || settings.shadowColor().length() > 0.00001f) {
+        if (settings.shadowColor() != null && settings.shadowColor().length() > 0.00001f) {
             component.getStyle().setShadow(new Shadow(1, 1, 16, -4, settings.shadowColor()));
         } else {
             component.getStyle().setShadow(null);

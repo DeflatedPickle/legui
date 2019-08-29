@@ -22,11 +22,14 @@ import org.liquidengine.legui.core.theme.colored.FlatColoredTheme.FlatColoredThe
  */
 public class FlatWidgetTheme<T extends Widget> extends FlatComponentTheme<T> {
 
-    private final FlatColoredThemeSettings settings;
+    /**
+     * Default constructor. Settings should be specified before using this theme.
+     */
+    public FlatWidgetTheme() {
+    }
 
     public FlatWidgetTheme(FlatColoredThemeSettings settings) {
         super(settings);
-        this.settings = settings;
     }
 
     /**
@@ -36,7 +39,7 @@ public class FlatWidgetTheme<T extends Widget> extends FlatComponentTheme<T> {
      */
     @Override
     public void applyAll(T component) {
-        super.applyAll(component);
+        super.apply(component);
         component.getStyle().getBackground().setColor(settings.backgroundColor());
 
         Button minimizeButton = component.getMinimizeButton();
@@ -53,6 +56,7 @@ public class FlatWidgetTheme<T extends Widget> extends FlatComponentTheme<T> {
         titleContainer.getStyle().getBackground().setColor(settings.borderColor());
 
         Button resizeButton = component.getResizeButton();
+        resizeButton.getStyle().setBorder(null);
         resizeButton.getStyle().getBackground().setColor(ColorConstants.transparent());
         resizeButton.getHoveredStyle().getBackground().setColor(ColorConstants.transparent());
         resizeButton.getPressedStyle().getBackground().setColor(ColorConstants.transparent());

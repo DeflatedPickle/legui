@@ -9,6 +9,12 @@ import org.liquidengine.legui.core.theme.colored.FlatColoredTheme.FlatColoredThe
  */
 public class FlatLayerTheme<T extends Layer> extends FlatComponentTheme<T> {
 
+    /**
+     * Default constructor. Settings should be specified before using this theme.
+     */
+    public FlatLayerTheme() {
+    }
+
     public FlatLayerTheme(FlatColoredThemeSettings settings) {
         super(settings);
     }

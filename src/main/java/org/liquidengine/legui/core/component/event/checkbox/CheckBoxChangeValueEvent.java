@@ -24,6 +24,7 @@ public class CheckBoxChangeValueEvent<T extends CheckBox> extends Event<T> {
 
     /**
      * Returns old value.
+     * @deprecated since 2.0.0 - use {@link #getOldValue()}
      *
      * @return old value.
      */
@@ -33,10 +34,29 @@ public class CheckBoxChangeValueEvent<T extends CheckBox> extends Event<T> {
 
     /**
      * Returns new value.
+     * @deprecated since 2.0.0 - use {@link #getNewValue()}
      *
      * @return new value.
      */
     public boolean isNewValue() {
+        return newValue;
+    }
+
+    /**
+     * Returns old value.
+     *
+     * @return old value.
+     */
+    public boolean getOldValue() {
+        return oldValue;
+    }
+
+    /**
+     * Returns new value.
+     *
+     * @return new value.
+     */
+    public boolean getNewValue() {
         return newValue;
     }
 
@@ -50,9 +70,13 @@ public class CheckBoxChangeValueEvent<T extends CheckBox> extends Event<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
 
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         CheckBoxChangeValueEvent<?> that = (CheckBoxChangeValueEvent<?>) o;
 

@@ -10,12 +10,14 @@ import org.liquidengine.legui.core.theme.colored.FlatColoredTheme.FlatColoredThe
  */
 public class FlatProgressBarTheme<T extends ProgressBar> extends FlatComponentTheme<T> {
 
-    private FlatColoredThemeSettings settings;
+    /**
+     * Default constructor. Settings should be specified before using this theme.
+     */
+    public FlatProgressBarTheme() {
+    }
 
     public FlatProgressBarTheme(FlatColoredThemeSettings settings) {
         super(settings);
-
-        this.settings = settings;
     }
 
     /**

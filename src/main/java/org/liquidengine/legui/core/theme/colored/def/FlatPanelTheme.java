@@ -11,11 +11,14 @@ import org.liquidengine.legui.core.theme.colored.FlatColoredTheme.FlatColoredThe
  */
 public class FlatPanelTheme<T extends Panel> extends FlatComponentTheme<T> {
 
-    private FlatColoredThemeSettings settings;
+    /**
+     * Default constructor. Settings should be specified before using this theme.
+     */
+    public FlatPanelTheme() {
+    }
 
     public FlatPanelTheme(FlatColoredThemeSettings settings) {
         super(settings);
-        this.settings = settings;
     }
 
     /**

@@ -8,6 +8,8 @@ import org.liquidengine.legui.core.input.Mouse;
 import org.liquidengine.legui.core.listener.MouseDragEventListener;
 import org.liquidengine.legui.core.style.length.Length;
 import org.liquidengine.legui.core.style.util.StyleUtilities;
+import org.liquidengine.legui.core.component.event.component.ChangeSizeEvent;
+import org.liquidengine.legui.core.listener.processor.EventProcessor;
 
 import static org.liquidengine.legui.core.style.length.LengthType.pixel;
 
@@ -16,6 +18,7 @@ import static org.liquidengine.legui.core.style.length.LengthType.pixel;
  */
 public class WidgetResizeButtonDragListener implements MouseDragEventListener {
 
+    public static final float THRESHOLD = 0.0001f;
     private Button resizeButton;
     private Widget widget;
 
@@ -83,7 +86,11 @@ public class WidgetResizeButtonDragListener implements MouseDragEventListener {
             }
         }
 
+        Vector2f oldSize = new Vector2f(widget.getSize());
         widget.getSize().add(deltaSize);
-
+        Vector2f newSize = widget.getSize();
+        if (!oldSize.equals(newSize, THRESHOLD)) {
+            EventProcessor.getInstance().pushEvent(new ChangeSizeEvent(widget, event.getContext(), event.getFrame(), oldSize, newSize));
+        }
     }
 }
