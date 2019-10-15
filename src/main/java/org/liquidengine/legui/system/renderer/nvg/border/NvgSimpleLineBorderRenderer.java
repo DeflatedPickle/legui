@@ -1,9 +1,13 @@
 package org.liquidengine.legui.system.renderer.nvg.border;
 
-import org.liquidengine.legui.border.SimpleLineBorder;
+import org.joml.Vector2f;
+import org.joml.Vector4f;
 import org.liquidengine.legui.component.Component;
+import org.liquidengine.legui.style.Style;
+import org.liquidengine.legui.style.border.SimpleLineBorder;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.renderer.nvg.NvgBorderRenderer;
+import org.liquidengine.legui.system.renderer.nvg.util.NvgRenderUtils;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgShapes;
 
 /**
@@ -14,12 +18,29 @@ public class NvgSimpleLineBorderRenderer extends NvgBorderRenderer<SimpleLineBor
     @Override
     protected void renderBorder(SimpleLineBorder border, Component component, Context context, long nanovg) {
         if (border.isEnabled()) {
-            if (border.getThickness() <= 0 || border.getColor().w == 0) {
+            float thickness = border.getThickness();
+            Vector4f borderColor = border.getColor();
+            if (thickness <= 0 || borderColor.w == 0) {
                 return;
             }
 
-            NvgShapes.drawRectStroke(
-                nanovg, component.getAbsolutePosition(), component.getSize(), border.getColor(), border.getThickness(), component.getCornerRadius());
+//            float cornerRadius = component.getBorderRadius();
+            Vector2f size = component.getSize();
+            Style style = component.getStyle();
+            Vector2f absolutePosition = component.getAbsolutePosition();
+
+            Vector2f bSize = new Vector2f(size);
+            bSize.add(thickness, thickness);
+            Vector2f bPos = new Vector2f(absolutePosition).sub(thickness / 2f, thickness / 2f);
+
+            Vector4f borderRadius = NvgRenderUtils.getBorderRadius(component);
+
+            if (component.isFocused() && style.getFocusedStrokeColor() != null) {
+                Vector4f strokeColor = style.getFocusedStrokeColor();
+                NvgShapes.drawRectStroke(nanovg, new Vector2f(bPos).add(-0.5f, +0.5f), new Vector2f(bSize).add(1f,1f), strokeColor, 1f, borderRadius);
+            }
+            NvgShapes.drawRectStroke(nanovg, bPos, bSize, borderColor, thickness, borderRadius);
+
         }
     }
 }

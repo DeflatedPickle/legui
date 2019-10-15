@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.liquidengine.legui.border.Border;
-import org.liquidengine.legui.border.SimpleLineBorder;
 import org.liquidengine.legui.component.Button;
 import org.liquidengine.legui.component.CheckBox;
 import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Container;
 import org.liquidengine.legui.component.ImageView;
 import org.liquidengine.legui.component.Label;
 import org.liquidengine.legui.component.PasswordInput;
@@ -17,15 +14,18 @@ import org.liquidengine.legui.component.ProgressBar;
 import org.liquidengine.legui.component.RadioButton;
 import org.liquidengine.legui.component.ScrollBar;
 import org.liquidengine.legui.component.Slider;
-import org.liquidengine.legui.component.TextArea;
+import org.liquidengine.legui.component.TextAreaField;
 import org.liquidengine.legui.component.TextInput;
 import org.liquidengine.legui.component.ToggleButton;
 import org.liquidengine.legui.component.Tooltip;
 import org.liquidengine.legui.icon.CharIcon;
 import org.liquidengine.legui.icon.Icon;
 import org.liquidengine.legui.icon.ImageIcon;
+import org.liquidengine.legui.image.FBOImage;
 import org.liquidengine.legui.image.Image;
 import org.liquidengine.legui.image.LoadableImage;
+import org.liquidengine.legui.style.Border;
+import org.liquidengine.legui.style.border.SimpleLineBorder;
 import org.liquidengine.legui.system.renderer.BorderRenderer;
 import org.liquidengine.legui.system.renderer.ComponentRenderer;
 import org.liquidengine.legui.system.renderer.IconRenderer;
@@ -35,7 +35,6 @@ import org.liquidengine.legui.system.renderer.nvg.border.NvgDefaultBorderRendere
 import org.liquidengine.legui.system.renderer.nvg.border.NvgSimpleLineBorderRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgButtonRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgCheckBoxRenderer;
-import org.liquidengine.legui.system.renderer.nvg.component.NvgContainerRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgDefaultComponentRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgImageViewRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgLabelRenderer;
@@ -44,7 +43,7 @@ import org.liquidengine.legui.system.renderer.nvg.component.NvgProgressBarRender
 import org.liquidengine.legui.system.renderer.nvg.component.NvgRadioButtonRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgScrollBarRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgSliderRenderer;
-import org.liquidengine.legui.system.renderer.nvg.component.NvgTextAreaRenderer;
+import org.liquidengine.legui.system.renderer.nvg.component.NvgTextAreaFieldRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgTextInputRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgToggleButtonRenderer;
 import org.liquidengine.legui.system.renderer.nvg.component.NvgTooltipRenderer;
@@ -52,17 +51,18 @@ import org.liquidengine.legui.system.renderer.nvg.icon.NvgCharIconRenderer;
 import org.liquidengine.legui.system.renderer.nvg.icon.NvgDefaultIconRenderer;
 import org.liquidengine.legui.system.renderer.nvg.icon.NvgImageIconRenderer;
 import org.liquidengine.legui.system.renderer.nvg.image.NvgDefaultImageRenderer;
+import org.liquidengine.legui.system.renderer.nvg.image.NvgFBOImageRenderer;
 import org.liquidengine.legui.system.renderer.nvg.image.NvgLoadableImageRenderer;
 
 /**
- * Created by Aliaksandr_Shcherbin on 1/26/2017.
+ * Created by ShchAlexander on 1/26/2017.
  */
 public class NvgRendererProvider extends RendererProvider {
 
-    private Map<Class<? extends Component>, NvgComponentRenderer<? extends Component>> componentRendererMap = new ConcurrentHashMap<>();
-    private Map<Class<? extends Border>, NvgBorderRenderer<? extends Border>> borderRendererMap = new ConcurrentHashMap<>();
-    private Map<Class<? extends Icon>, NvgIconRenderer<? extends Icon>> iconRendererMap = new ConcurrentHashMap<>();
-    private Map<Class<? extends Image>, NvgImageRenderer<? extends Image>> imageRendererMap = new ConcurrentHashMap<>();
+    private Map<Class<? extends Component>, ComponentRenderer<? extends Component>> componentRendererMap = new ConcurrentHashMap<>();
+    private Map<Class<? extends Border>, BorderRenderer<? extends Border>> borderRendererMap = new ConcurrentHashMap<>();
+    private Map<Class<? extends Icon>, IconRenderer<? extends Icon>> iconRendererMap = new ConcurrentHashMap<>();
+    private Map<Class<? extends Image>, ImageRenderer<? extends Image>> imageRendererMap = new ConcurrentHashMap<>();
 
     private NvgComponentRenderer defaultComponentRenderer = new NvgDefaultComponentRenderer();
     private NvgBorderRenderer defaultBorderRenderer = new NvgDefaultBorderRenderer();
@@ -72,7 +72,6 @@ public class NvgRendererProvider extends RendererProvider {
     private NvgRendererProvider() {
 
         // register component renderers
-        componentRendererMap.put(Container.class, new NvgContainerRenderer());
         componentRendererMap.put(Button.class, new NvgButtonRenderer());
         componentRendererMap.put(ToggleButton.class, new NvgToggleButtonRenderer());
         componentRendererMap.put(ImageView.class, new NvgImageViewRenderer());
@@ -82,7 +81,7 @@ public class NvgRendererProvider extends RendererProvider {
         componentRendererMap.put(RadioButton.class, new NvgRadioButtonRenderer());
         componentRendererMap.put(ScrollBar.class, new NvgScrollBarRenderer());
         componentRendererMap.put(Slider.class, new NvgSliderRenderer());
-        componentRendererMap.put(TextArea.class, new NvgTextAreaRenderer());
+        componentRendererMap.put(TextAreaField.class, new NvgTextAreaFieldRenderer());
         componentRendererMap.put(TextInput.class, new NvgTextInputRenderer());
         componentRendererMap.put(PasswordInput.class, new NvgPasswordInputRenderer());
         componentRendererMap.put(Tooltip.class, new NvgTooltipRenderer());
@@ -96,6 +95,7 @@ public class NvgRendererProvider extends RendererProvider {
 
         // register image renderers
         imageRendererMap.put(LoadableImage.class, new NvgLoadableImageRenderer<>());
+        imageRendererMap.put(FBOImage.class, new NvgFBOImageRenderer());
     }
 
     public static NvgRendererProvider getInstance() {
@@ -138,7 +138,12 @@ public class NvgRendererProvider extends RendererProvider {
         return renderer;
     }
 
+
     public <I extends Component, R extends NvgComponentRenderer<I>> void putComponentRenderer(Class<I> imageClass, R renderer) {
+        addComponentRenderer(imageClass, renderer);
+    }
+
+    protected <I extends Component, R extends ComponentRenderer<I>> void addComponentRenderer(Class<I> imageClass, R renderer) {
         if (imageClass == null || renderer == null) {
             return;
         }
@@ -146,6 +151,10 @@ public class NvgRendererProvider extends RendererProvider {
     }
 
     public <I extends Border, R extends NvgBorderRenderer<I>> void putBorderRenderer(Class<I> imageClass, R renderer) {
+        addBorderRenderer(imageClass, renderer);
+    }
+
+    protected <I extends Border, R extends BorderRenderer<I>> void addBorderRenderer(Class<I> imageClass, R renderer) {
         if (imageClass == null || renderer == null) {
             return;
         }
@@ -154,6 +163,10 @@ public class NvgRendererProvider extends RendererProvider {
 
 
     public <I extends Icon, R extends NvgIconRenderer<I>> void putIconRenderer(Class<I> imageClass, R renderer) {
+        addIconRenderer(imageClass, renderer);
+    }
+
+    protected <I extends Icon, R extends IconRenderer<I>> void addIconRenderer(Class<I> imageClass, R renderer) {
         if (imageClass == null || renderer == null) {
             return;
         }
@@ -162,6 +175,10 @@ public class NvgRendererProvider extends RendererProvider {
 
 
     public <I extends Image, R extends NvgImageRenderer<I>> void putImageRenderer(Class<I> imageClass, R renderer) {
+        addImageRenderer(imageClass, renderer);
+    }
+
+    protected <I extends Image, R extends ImageRenderer<I>> void addImageRenderer(Class<I> imageClass, R renderer) {
         if (imageClass == null || renderer == null) {
             return;
         }

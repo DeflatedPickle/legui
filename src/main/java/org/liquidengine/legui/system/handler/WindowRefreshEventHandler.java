@@ -2,16 +2,15 @@ package org.liquidengine.legui.system.handler;
 
 import java.util.List;
 import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Container;
 import org.liquidengine.legui.component.Frame;
 import org.liquidengine.legui.component.Layer;
 import org.liquidengine.legui.event.WindowRefreshEvent;
-import org.liquidengine.legui.listener.processor.EventProcessor;
+import org.liquidengine.legui.listener.processor.EventProcessorProvider;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemWindowRefreshEvent;
 
 /**
- * Created by Aliaksandr_Shcherbin on 2/2/2017.
+ * Created by ShchAlexander on 2/2/2017.
  */
 public class WindowRefreshEventHandler extends AbstractSystemEventHandler<SystemWindowRefreshEvent> {
 
@@ -25,12 +24,10 @@ public class WindowRefreshEventHandler extends AbstractSystemEventHandler<System
         if (!(component.isVisible())) {
             return;
         }
-        EventProcessor.getInstance().pushEvent(new WindowRefreshEvent(component, context, frame));
-        if (component instanceof Container) {
-            List<Component> childs = ((Container) component).getChilds();
-            for (Component child : childs) {
-                pushEvent(child, context, frame);
-            }
+        EventProcessorProvider.getInstance().pushEvent(new WindowRefreshEvent(component, context, frame));
+        List<Component> childComponents = component.getChildComponents();
+        for (Component child : childComponents) {
+            pushEvent(child, context, frame);
         }
     }
 }

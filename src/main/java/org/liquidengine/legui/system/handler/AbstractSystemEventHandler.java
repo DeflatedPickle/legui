@@ -9,7 +9,7 @@ import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemEvent;
 
 /**
- * Abstract handler for {@link SystemEvent}s. Used to handle events and transform them to UI events (Subclasses of {@link Event})
+ * Abstract handler for {@link SystemEvent}s. Used to handle events and transform them to UI events (Subclasses of {@link Event}).
  */
 public abstract class AbstractSystemEventHandler<E extends SystemEvent> implements SystemEventHandler<E> {
 
@@ -46,19 +46,21 @@ public abstract class AbstractSystemEventHandler<E extends SystemEvent> implemen
      *
      * @param event event which should be pre-processed.
      * @param frame target frame for event.
-     * @param context context
+     * @param context context.
      */
     protected void preHandle(E event, Frame frame, Context context) {
         // This method should be overrided to pre-handle some event.
     }
 
     /**
-     * This method used to handle some {@link SystemEvent} and produce (or not) {@link Event} instances (which are UI events)
+     * This method used to handle some {@link SystemEvent} and produce (or not) {@link Event} instances (which are UI events).
      *
      * @param event event to be processed.
      * @param layer target event layer.
      * @param context context.
-     * @return true if event processed and it shouldn't be processed for other underlying layers.
+     * @param frame frame.
+     *
+     * @return true if shouldn't be processed in other underlying layers.
      */
     protected boolean handle(E event, Layer layer, Context context, Frame frame) {
         return false;
@@ -69,7 +71,7 @@ public abstract class AbstractSystemEventHandler<E extends SystemEvent> implemen
      *
      * @param event event which should be post-processed.
      * @param frame target frame for event.
-     * @param context context
+     * @param context context.
      */
     protected void postHandle(E event, Frame frame, Context context) {
         // This method should be overrided to post-handle some event.

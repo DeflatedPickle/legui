@@ -6,7 +6,7 @@ import org.liquidengine.legui.listener.EventListener;
  * Event listener for {@link WidgetCloseEvent}.
  *
  * @param <T> type of event (base type is {@link WidgetCloseEvent}).
- * @author Aliaksandr_Shcherbin.
+ * @author ShchAlexander.
  */
 public interface WidgetCloseEventListener<T extends WidgetCloseEvent> extends EventListener<T> {
 

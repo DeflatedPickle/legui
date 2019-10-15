@@ -5,13 +5,13 @@ import org.liquidengine.legui.event.MouseClickEvent;
 import org.liquidengine.legui.listener.MouseClickEventListener;
 
 /**
- * @author Aliaksandr_Shcherbin.
+ * @author ShchAlexander.
  */
 public class ToggleButtonMouseClickListener implements MouseClickEventListener {
 
     @Override
     public void process(MouseClickEvent event) {
-        ToggleButton toggleButton = (ToggleButton) event.getComponent();
+        ToggleButton toggleButton = (ToggleButton) event.getTargetComponent();
         if (event.getAction() == MouseClickEvent.MouseClickAction.CLICK) {
             toggleButton.setToggled(!toggleButton.isToggled());
         }

@@ -8,3 +8,12 @@
 hs_err_pid*
 /logs/
 
+*.class
+*.iml
+/bin/
+
+.classpath
+.project
+/.settings/
+/deploy_rsa
+/deploy_rsa.pub

@@ -36,6 +36,7 @@ public class ListenerMap {
      *
      * @param eventClass event class for which registered listeners.
      * @param <E> event type.
+     *
      * @return event listeners for specified event type.
      */
     public <E extends Event> List<EventListener<E>> getListeners(Class<E> eventClass) {
@@ -57,6 +58,15 @@ public class ListenerMap {
      */
     public <E extends Event> void removeListener(Class<E> eventClass, EventListener<E> listener) {
         getListeners(eventClass).remove(listener);
+    }
+
+    /**
+     * Used to remove all listeners for specified event type.
+     * @param eventClass event class.
+     * @param <E> event type.
+     */
+    public <E extends Event> void removeAllListeners(Class<E> eventClass) {
+        listenerMap.remove(eventClass);
     }
 
     @Override

@@ -2,11 +2,10 @@ package org.liquidengine.legui.system.handler;
 
 import java.util.List;
 import org.liquidengine.legui.component.Component;
-import org.liquidengine.legui.component.Container;
 import org.liquidengine.legui.component.Frame;
 import org.liquidengine.legui.component.Layer;
 import org.liquidengine.legui.event.WindowCloseEvent;
-import org.liquidengine.legui.listener.processor.EventProcessor;
+import org.liquidengine.legui.listener.processor.EventProcessorProvider;
 import org.liquidengine.legui.system.context.Context;
 import org.liquidengine.legui.system.event.SystemWindowCloseEvent;
 
@@ -25,12 +24,10 @@ public class WindowCloseEventHandler extends AbstractSystemEventHandler<SystemWi
         if (!(component.isVisible())) {
             return;
         }
-        EventProcessor.getInstance().pushEvent(new WindowCloseEvent(component, context, frame));
-        if (component instanceof Container) {
-            List<Component> childs = ((Container) component).getChilds();
-            for (Component child : childs) {
-                pushEvent(child, context, frame);
-            }
+        EventProcessorProvider.getInstance().pushEvent(new WindowCloseEvent(component, context, frame));
+        List<Component> childComponents = component.getChildComponents();
+        for (Component child : childComponents) {
+            pushEvent(child, context, frame);
         }
     }
 }

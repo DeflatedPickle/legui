@@ -13,8 +13,8 @@ import org.joml.Vector2f;
 
 /**
  * This class used to hold mouse state.
- *
- * Created by Aliaksandr_Shcherbin on 2/9/2017.
+ * <p>
+ * Created by ShchAlexander on 2/9/2017.
  */
 public class Mouse {
 
@@ -58,7 +58,7 @@ public class Mouse {
     }
 
     /**
-     * Created by Aliaksandr_Shcherbin on 2/9/2017.
+     * Created by ShchAlexander on 2/9/2017.
      */
     public enum MouseButton {
         /**
@@ -124,6 +124,7 @@ public class Mouse {
          * Gets by code.
          *
          * @param code the code
+         *
          * @return the by code
          */
         public static MouseButton getByCode(int code) {

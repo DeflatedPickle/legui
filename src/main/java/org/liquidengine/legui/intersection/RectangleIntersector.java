@@ -3,7 +3,6 @@ package org.liquidengine.legui.intersection;
 import java.util.HashMap;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.joml.PolygonsIntersection;
 import org.joml.Vector2f;
 import org.liquidengine.legui.component.Component;
 
@@ -19,16 +18,7 @@ public class RectangleIntersector extends Intersector {
         float y = pos.y;
         float w = component.getSize().x;
         float h = component.getSize().y;
-        float verticies[] = {
-            x, y,
-            x + w, y,
-            x + w, y + h,
-            x, y + h
-        };
-        int start[] = {0};
-        int count = 4;
-        PolygonsIntersection intersector = new PolygonsIntersection(verticies, start, count);
-        return intersector.testPoint(point.x, point.y);
+        return point.x >= x && point.x <= x + w && point.y >= y && point.y <= y + h;
     }
 
     /**
@@ -62,6 +52,7 @@ public class RectangleIntersector extends Intersector {
      * integer, but this implementation technique is not required by the Java&trade; programming language.)
      *
      * @return a hash code value for this object.
+     *
      * @see Object#equals(Object)
      * @see System#identityHashCode
      */
@@ -85,7 +76,9 @@ public class RectangleIntersector extends Intersector {
      * method, which states that equal objects must have equal hash codes.
      *
      * @param obj the reference object with which to compare.
+     *
      * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+     *
      * @see #hashCode()
      * @see HashMap
      */

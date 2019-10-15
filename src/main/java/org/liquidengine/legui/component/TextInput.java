@@ -22,7 +22,7 @@ import org.liquidengine.legui.theme.Themes;
 /**
  * Text input is a single line text component which can be used to enter text.
  */
-public class TextInput extends Controller implements TextComponent {
+public class TextInput extends Component implements TextComponent {
 
     /**
      * Used to store text state of text input.
@@ -104,7 +104,7 @@ public class TextInput extends Controller implements TextComponent {
      */
     private void initialize(String text) {
         textState = new TextState(text);
-        textState.getPadding().set(5, 1, 5, 1);
+        getStyle().setPadding(1f, 5f);
 
         getListenerMap().addListener(KeyEvent.class, new TextInputKeyEventListener());
         getListenerMap().addListener(MouseClickEvent.class, new TextInputMouseClickEventListener());

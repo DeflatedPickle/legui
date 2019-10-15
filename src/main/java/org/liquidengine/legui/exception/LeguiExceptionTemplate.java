@@ -17,19 +17,7 @@ public enum LeguiExceptionTemplate {
      */
     UNMARSHAL_EXCEPTION("Can't unmarshal your component"),
     /**
-     * Used by {@link org.liquidengine.legui.marshal.json.gsonimpl.GsonMarshalUtil}.
-     */
-    MARSHALLER_IS_NOT_EXIST("Can't find marshaller for component type: '%s'"),
-    /**
-     * Used by {@link org.liquidengine.legui.marshal.json.gsonimpl.GsonMarshalUtil}.
-     */
-    UNMARSHALLER_IS_NOT_EXIST("Can't find unmarshaller for component type: '%s'"),
-    /**
-     * Used by {@link org.liquidengine.legui.marshal.json.gsonimpl.GsonMarshalUtil}.
-     */
-    GSON_REGISTRY_TYPE_EXIST("Type '%s' already exist in type registry."),
-    /**
-     * Used by {@link org.liquidengine.legui.font.Font}.
+     * Used by {@link org.liquidengine.legui.style.font.Font}.
      */
     FAILED_TO_LOAD_FONT("Failed to initialize font. (%s)"),
     /**
@@ -55,6 +43,7 @@ public enum LeguiExceptionTemplate {
      * Error message constructor.
      *
      * @param args error message variables.
+     *
      * @return constructed message.
      */
     public String message(String... args) {
@@ -65,6 +54,7 @@ public enum LeguiExceptionTemplate {
      * Used to create LeguiException with specified message and provided variables.
      *
      * @param args error message variables.
+     *
      * @return exception constructed with message template.
      */
     public LeguiException create(String... args) {
@@ -75,6 +65,8 @@ public enum LeguiExceptionTemplate {
      * Used to create LeguiException with specified message, {@link Throwable} cause and provided variables.
      *
      * @param args error message variables.
+     * @param e throwable instance.
+     *
      * @return exception constructed with message template.
      */
     public LeguiException create(Throwable e, String... args) {

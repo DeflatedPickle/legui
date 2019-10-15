@@ -1,14 +1,14 @@
 package org.liquidengine.legui.component;
 
-import java.io.Serializable;
+import org.joml.Vector2f;
 
 /**
  * Viewport interface specifies that component could be updated by event listeners by calling {@link #updateViewport()} method.
  */
-public interface Viewport extends Serializable {
+public interface Viewport {
 
-    /**
-     * Used to update viewport content position.
-     */
-    void updateViewport();
+    Vector2f getViewportSize();
+
+    Vector2f getViewportViewSize();
+
 }

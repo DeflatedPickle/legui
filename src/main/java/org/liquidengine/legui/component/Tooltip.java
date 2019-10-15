@@ -9,21 +9,34 @@ import org.liquidengine.legui.component.optional.TextState;
 import org.liquidengine.legui.theme.Themes;
 
 /**
- * Created by Aliaksandr_Shcherbin on 1/24/2017.
+ * Created by ShchAlexander on 1/24/2017.
  */
 public class Tooltip extends Component implements TextComponent {
 
     private TextState textState;
-    private Controller controller;
+    private Component component;
 
+    /**
+     * Constructor.
+     */
     public Tooltip() {
         initialize("");
     }
 
+    /**
+     * Constructor.
+     *
+     * @param tooltip text to set.
+     */
     public Tooltip(String tooltip) {
         initialize(tooltip);
     }
 
+    /**
+     * Used to initialize tooltip.
+     *
+     * @param text text to set.
+     */
     private void initialize(String text) {
         this.textState = new TextState(text);
 
@@ -39,24 +52,56 @@ public class Tooltip extends Component implements TextComponent {
         return textState;
     }
 
-    public Controller getController() {
-        return controller;
+    /**
+     * Returns component for which specified this tooltip.
+     *
+     * @return component for which specified this tooltip.
+     */
+    public Component getComponent() {
+        return component;
     }
 
-    public void setController(Controller controller) {
-        if (this.controller != null) {
-            this.controller.setTooltipComponent(null);
+    /**
+     * Used to set component to toltip.
+     *
+     * @param component component to set.
+     */
+    public void setComponent(Component component) {
+        // check self
+        if (component == this) {
+            return;
         }
-        this.controller = controller;
+        // check same component
+        if (this.component == component) {
+            return;
+        }
+        // remove tooltip from current component
+        if (this.component != null) {
+            Component prev = this.component;
+            this.component = null;
+            prev.setTooltip(null);
+        }
+        // set new component
+        this.component = component;
+        // bind this tooltip to component
+        if (component != null) {
+            component.setTooltip(this);
+        }
     }
 
+    /**
+     * Returns absolute component position.
+     *
+     * @return position vector.
+     */
     @Override
     public Vector2f getAbsolutePosition() {
         Vector2f position = new Vector2f(getPosition());
-        if (controller != null) {
-            position.add(controller.getAbsolutePosition());
+        if (component != null) {
+            position.add(component.getAbsolutePosition());
         }
         return position;
+
     }
 
     @Override

@@ -1,8 +1,8 @@
 package org.liquidengine.legui.system.renderer.nvg.component;
 
-import static org.liquidengine.legui.color.ColorUtil.oppositeBlackOrWhite;
 import static org.liquidengine.legui.component.optional.Orientation.VERTICAL;
-import static org.liquidengine.legui.system.renderer.nvg.NvgRenderer.renderBorder;
+import static org.liquidengine.legui.style.color.ColorUtil.oppositeBlackOrWhite;
+import static org.liquidengine.legui.system.renderer.nvg.util.NvgRenderUtils.*;
 import static org.liquidengine.legui.util.TextUtil.cpToStr;
 import static org.lwjgl.nanovg.NanoVG.nvgSave;
 
@@ -11,17 +11,15 @@ import org.joml.Vector4f;
 import org.liquidengine.legui.component.ScrollBar;
 import org.liquidengine.legui.component.optional.align.HorizontalAlign;
 import org.liquidengine.legui.component.optional.align.VerticalAlign;
-import org.liquidengine.legui.font.FontRegistry;
+import org.liquidengine.legui.style.font.FontRegistry;
 import org.liquidengine.legui.system.context.Context;
-import org.liquidengine.legui.system.renderer.nvg.NvgComponentRenderer;
-import org.liquidengine.legui.system.renderer.nvg.util.NvgRenderUtils;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgShapes;
 import org.liquidengine.legui.system.renderer.nvg.util.NvgText;
 
 /**
  * Created by ShchAlexander on 12.02.2017.
  */
-public class NvgScrollBarRenderer extends NvgComponentRenderer<ScrollBar> {
+public class NvgScrollBarRenderer extends NvgDefaultComponentRenderer<ScrollBar> {
 
     // TODO: It would be nice to add Icon here to render arrows.
     private static final String B = cpToStr(0xE5CF);
@@ -30,12 +28,13 @@ public class NvgScrollBarRenderer extends NvgComponentRenderer<ScrollBar> {
     private static final String T = cpToStr(0xE5CE);
 
     @Override
-    public void renderComponent(ScrollBar scrollBar, Context context, long nanovg) {
-        NvgRenderUtils.drawInScissor(nanovg, scrollBar, () -> {
+    public void renderSelf(ScrollBar scrollBar, Context context, long nanovg) {
+        createScissor(nanovg, scrollBar);
+        {
             nvgSave(nanovg);
             Vector2f pos = scrollBar.getAbsolutePosition();
             Vector2f size = scrollBar.getSize();
-            Vector4f backgroundColor = new Vector4f(scrollBar.getBackgroundColor());
+            Vector4f backgroundColor = new Vector4f(scrollBar.getStyle().getBackground().getColor());
 
             float arrowSize = scrollBar.getArrowSize();
 
@@ -47,7 +46,7 @@ public class NvgScrollBarRenderer extends NvgComponentRenderer<ScrollBar> {
             boolean vertical = VERTICAL.equals(scrollBar.getOrientation());
 
             // draw background
-            NvgShapes.drawRect(nanovg, pos, size, backgroundColor, scrollBar.getCornerRadius());
+            renderBackground(scrollBar, context, nanovg);
 
             // draw scroll bar back
             {
@@ -60,18 +59,16 @@ public class NvgScrollBarRenderer extends NvgComponentRenderer<ScrollBar> {
                     scrollBarPos.set(pos.x + diff, pos.y);
                     scrollBarSize.set(size.x - 2 * diff, size.y);
                 }
-                NvgShapes.drawRect(nanovg, scrollBarPos, scrollBarSize, scrollBar.getBackgroundColor(), arrowsEnabled ? 0 : scrollBar.getCornerRadius());
+                NvgShapes.drawRect(nanovg, scrollBarPos, scrollBarSize, scrollBar.getStyle().getBackground().getColor(),
+                                   arrowsEnabled ? new Vector4f(0) : getBorderRadius(scrollBar));
             }
             // draw arrows
             drawArrows(nanovg, scrollBar, pos, size);
 
             // draw scroll button
             drawScrollButton(nanovg, pos, size, scrollBar, diff, offset, vertical);
-
-            // draw border
-            renderBorder(scrollBar, context);
-
-        });
+        }
+        resetScissor(nanovg);
     }
 
     /**
@@ -91,7 +88,7 @@ public class NvgScrollBarRenderer extends NvgComponentRenderer<ScrollBar> {
             Vector2f arrowBgSize = new Vector2f();
             Vector2f arrow2pos = new Vector2f();
             float arrowSize = scrollBar.getArrowSize();
-            float cornerRadius = scrollBar.getCornerRadius();
+            Vector4f cornerRadius = getBorderRadius(scrollBar);
             boolean vertical = VERTICAL.equals(scrollBar.getOrientation());
             if (vertical) {
                 firstArrowIcon = T;
@@ -123,9 +120,9 @@ public class NvgScrollBarRenderer extends NvgComponentRenderer<ScrollBar> {
                 Vector4f secondArrowBounds = new Vector4f(arrow2pos.x, arrow2pos.y, arrowBgSize.x, arrowBgSize.y);
 
                 NvgText.drawTextLineToRect(nanovg, firstArrowBounds, false, HorizontalAlign.CENTER, VerticalAlign.MIDDLE, fontSize,
-                    FontRegistry.MATERIAL_ICONS_REGULAR, firstArrowIcon, color);
+                                           FontRegistry.MATERIAL_ICONS_REGULAR, firstArrowIcon, color);
                 NvgText.drawTextLineToRect(nanovg, secondArrowBounds, false, HorizontalAlign.CENTER, VerticalAlign.MIDDLE, fontSize,
-                    FontRegistry.MATERIAL_ICONS_REGULAR, secondArrowIcon, color);
+                                           FontRegistry.MATERIAL_ICONS_REGULAR, secondArrowIcon, color);
             }
         }
     }
@@ -160,6 +157,6 @@ public class NvgScrollBarRenderer extends NvgComponentRenderer<ScrollBar> {
             scrollSize.set(barSize - 2 * offset, size.y - 2 * offset);
         }
 
-        NvgShapes.drawRect(nanovg, scrollPos, scrollSize, scrollBar.getScrollColor(), scrollBar.getCornerRadius());
+        NvgShapes.drawRect(nanovg, scrollPos, scrollSize, scrollBar.getScrollColor(), getBorderRadius(scrollBar));
     }
 }

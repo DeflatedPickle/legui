@@ -7,7 +7,7 @@ import org.liquidengine.legui.event.MouseClickEvent;
 import org.liquidengine.legui.listener.MouseClickEventListener;
 
 /**
- * @author Aliaksandr_Shcherbin.
+ * @author ShchAlexander.
  */
 public class WidgetMinimizeButMouseClickEventListener implements MouseClickEventListener {
 
@@ -20,7 +20,7 @@ public class WidgetMinimizeButMouseClickEventListener implements MouseClickEvent
     public void process(MouseClickEvent event) {
         if (CLICK == event.getAction()) {
             boolean newValue = !widget.isMinimized();
-            widget.getMinimizeButton().setBackgroundIcon(newValue ? widget.getMaximizeIcon() : widget.getMinimizeIcon());
+            widget.getMinimizeButton().getStyle().getBackground().setIcon(newValue ? widget.getMaximizeIcon() : widget.getMinimizeIcon());
             widget.setMinimized(newValue);
         }
     }
