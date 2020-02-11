@@ -1,6 +1,5 @@
 package org.liquidengine.legui.demo;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import org.liquidengine.legui.animation.Animation;
@@ -34,6 +33,8 @@ import org.liquidengine.legui.theme.Theme;
 import org.liquidengine.legui.theme.Themes;
 import org.liquidengine.legui.util.TextUtil;
 import org.lwjgl.glfw.GLFW;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.liquidengine.legui.component.optional.align.HorizontalAlign.*;
 import static org.liquidengine.legui.component.optional.align.VerticalAlign.*;
@@ -149,14 +150,14 @@ public class ExampleGui extends Panel {
         this.add(slider2);
 
         textInput = new TextInput(250, 130, 100, 30);
-        textInput.getTextState().setHorizontalAlign(RIGHT);
+        textInput.getStyle().setHorizontalAlign(RIGHT);
         textInput.getListenerMap().addListener(KeyEvent.class, (KeyEventListener) event -> {
             if (event.getKey() == GLFW.GLFW_KEY_F1 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textInput.getTextState().setHorizontalAlign(LEFT);
+                textInput.getStyle().setHorizontalAlign(LEFT);
             } else if (event.getKey() == GLFW.GLFW_KEY_F2 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textInput.getTextState().setHorizontalAlign(CENTER);
+                textInput.getStyle().setHorizontalAlign(CENTER);
             } else if (event.getKey() == GLFW.GLFW_KEY_F3 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textInput.getTextState().setHorizontalAlign(RIGHT);
+                textInput.getStyle().setHorizontalAlign(RIGHT);
             }
         });
         this.add(textInput);
@@ -164,7 +165,7 @@ public class ExampleGui extends Panel {
         Widget widget = new Widget("Hello widget", 250, 170, 100, 100);
         widget.setTitleHeight(20);
         widget.getTitleContainer().getStyle().getBackground().setColor(ColorConstants.lightGreen());
-        widget.getTitleTextState().setTextColor(ColorConstants.black());
+        widget.getStyle().setTextColor(ColorConstants.black());
 
         String innerText = "Inner Widget; Resize events: ";
         Widget inner = new Widget(innerText + 0);
@@ -207,7 +208,7 @@ public class ExampleGui extends Panel {
         widget2.setCloseButtonColor(ColorConstants.white());
         widget2.getCloseButton().getStyle().getBackground().setColor(ColorConstants.black());
         widget2.getTitleContainer().getStyle().getBackground().setColor(ColorConstants.lightGreen());
-        widget2.getTitleTextState().setTextColor(ColorConstants.black());
+        widget2.getStyle().setTextColor(ColorConstants.black());
         widget2.setDraggable(false);
         widget2.setMinimizable(true);
 
@@ -256,7 +257,7 @@ public class ExampleGui extends Panel {
         widget3.getTitleContainer().getStyle().getBackground().setColor(ColorConstants.lightGreen());
         widget3.setCloseable(false);
         widget3.setMinimizable(true);
-        widget3.getTitleTextState().setTextColor(ColorConstants.black());
+        widget3.getStyle().setTextColor(ColorConstants.black());
         this.add(widget3);
 
         Button turnWidVisible3 = new Button("", 360, 340, 20, 20);
@@ -272,10 +273,10 @@ public class ExampleGui extends Panel {
         widget3.getContainer().add(new Panel(30, 30, 20, 20));
         widget3.getContainer().add(new Panel(5, 30, 20, 20));
         Button b = new Button(55, 5, 40, 20);
-        b.getTextState().setFont(FontRegistry.MATERIAL_ICONS_REGULAR);
-        b.getTextState().setVerticalAlign(MIDDLE);
-        b.getTextState().setHorizontalAlign(CENTER);
-        b.getTextState().setFontSize(20);
+        b.getStyle().setFont(FontRegistry.MATERIAL_ICONS_REGULAR);
+        b.getStyle().setVerticalAlign(MIDDLE);
+        b.getStyle().setHorizontalAlign(CENTER);
+        b.getStyle().setFontSize(20f);
 
         String up = TextUtil.cpToStr(0xE5D8);
         String down = TextUtil.cpToStr(0xE5DB);
@@ -290,9 +291,9 @@ public class ExampleGui extends Panel {
         widget3.getContainer().add(b);
 
         Button b2 = new Button(55, 30, 40, 20);
-        b2.getTextState().setVerticalAlign(MIDDLE);
-        b2.getTextState().setHorizontalAlign(CENTER);
-        b2.getTextState().setFontSize(20);
+        b2.getStyle().setVerticalAlign(MIDDLE);
+        b2.getStyle().setHorizontalAlign(CENTER);
+        b2.getStyle().setFontSize(20f);
 
         String up2 = "-";
         String down2 = "+";
@@ -384,39 +385,39 @@ public class ExampleGui extends Panel {
         textArea = new TextArea(420, 280, 150, 100);
         textArea.getTextState().setText("ABC DEF GH\r\nI JKL MNO PQR\nSTU VWXYZ");
         textArea.setCaretPosition(12);
-        textArea.getTextState().setHorizontalAlign(CENTER);
-        textArea.getTextState().setVerticalAlign(BOTTOM);
+        textArea.getTextAreaField().getStyle().setHorizontalAlign(CENTER);
+        textArea.getTextAreaField().getStyle().setVerticalAlign(BOTTOM);
         this.add(textArea);
 
         textArea.getTextAreaField().getListenerMap().addListener(KeyEvent.class, (KeyEventListener) event -> {
             if (event.getKey() == GLFW.GLFW_KEY_F1 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textArea.getTextState().setHorizontalAlign(LEFT);
+                textArea.getTextAreaField().getStyle().setHorizontalAlign(LEFT);
             } else if (event.getKey() == GLFW.GLFW_KEY_F2 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textArea.getTextState().setHorizontalAlign(CENTER);
+                textArea.getTextAreaField().getStyle().setHorizontalAlign(CENTER);
             } else if (event.getKey() == GLFW.GLFW_KEY_F3 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textArea.getTextState().setHorizontalAlign(RIGHT);
+                textArea.getTextAreaField().getStyle().setHorizontalAlign(RIGHT);
             } else if (event.getKey() == GLFW.GLFW_KEY_F5 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textArea.getTextState().setVerticalAlign(TOP);
+                textArea.getTextAreaField().getStyle().setVerticalAlign(TOP);
             } else if (event.getKey() == GLFW.GLFW_KEY_F6 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textArea.getTextState().setVerticalAlign(MIDDLE);
+                textArea.getTextAreaField().getStyle().setVerticalAlign(MIDDLE);
             } else if (event.getKey() == GLFW.GLFW_KEY_F7 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textArea.getTextState().setVerticalAlign(BOTTOM);
+                textArea.getTextAreaField().getStyle().setVerticalAlign(BOTTOM);
             } else if (event.getKey() == GLFW.GLFW_KEY_F8 && event.getAction() == GLFW.GLFW_RELEASE) {
-                textArea.getTextState().setVerticalAlign(BASELINE);
+                textArea.getTextAreaField().getStyle().setVerticalAlign(BASELINE);
             }
         });
 
         Label passLabel = new Label("Password:", 420, 390, 150, 15);
         this.add(passLabel);
         PasswordInput caretp = new PasswordInput(420, 405, 150, 20);
-        caretp.getTextState().setHorizontalAlign(CENTER);
+        caretp.getStyle().setHorizontalAlign(CENTER);
         this.add(caretp);
 
         TextInput inpur = new TextInput(420, 430, 50, 35);
         inpur.getTextState().setText("00");
-        inpur.getTextState().setFontSize(35);
-        inpur.getTextState().setHorizontalAlign(CENTER);
-        inpur.getTextState().setVerticalAlign(MIDDLE);
+        inpur.getStyle().setFontSize(35f);
+        inpur.getStyle().setHorizontalAlign(CENTER);
+        inpur.getStyle().setVerticalAlign(MIDDLE);
         inpur.getStyle().getBackground().setColor(ColorConstants.white());
         this.add(inpur);
 
@@ -513,8 +514,8 @@ public class ExampleGui extends Panel {
                         break;
                 }
                 System.out.println(h + " " + v);
-                button.getTooltip().getTextState().setHorizontalAlign(h);
-                button.getTooltip().getTextState().setVerticalAlign(v);
+                button.getTooltip().getStyle().setHorizontalAlign(h);
+                button.getTooltip().getStyle().setVerticalAlign(v);
             }
         });
         return button;
@@ -564,7 +565,7 @@ public class ExampleGui extends Panel {
         toggleButton.getTooltip().setPosition(45, 0);
         toggleButton.getTooltip().getSize().set(140, 40);
         toggleButton.getTooltip().getStyle().getBackground().setColor(ColorConstants.darkGray());
-        toggleButton.getTooltip().getTextState().setTextColor(ColorConstants.white());
+        toggleButton.getTooltip().getStyle().setTextColor(ColorConstants.white());
         toggleButton.getTooltip().getStyle().setPadding(4f);
 
         int[] id = {0};
@@ -598,8 +599,8 @@ public class ExampleGui extends Panel {
                         break;
                 }
                 System.out.println(h + " " + v);
-                toggleButton.getTooltip().getTextState().setHorizontalAlign(h);
-                toggleButton.getTooltip().getTextState().setVerticalAlign(v);
+                toggleButton.getTooltip().getStyle().setHorizontalAlign(h);
+                toggleButton.getTooltip().getStyle().setVerticalAlign(v);
 
             }
         });
